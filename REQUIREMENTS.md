@@ -1,26 +1,26 @@
-Endpoints
+### Endpoints
 
  Users
- * Show 
- * CreateUser
- * deleteUser
- * updateUSer
+ * GET / Show 
+ * POST / CreateUser
+ * DELETE / deleteUser
+ * PUT / updateUSer
 
 
  Products 
-* Show
-* CreateProduct
-* deleteProduct
-* updateProduct 
+* GET / Show
+* POST / CreateProduct
+* DELETE / deleteProduct
+* PUT / updateProduct 
 
 
  Orders
-* show
-* createOrder
-* deleteOrder
-* updateOrder
+* GET / show
+* POST / createOrder
+* DELETE / deleteOrder
+* PUT / updateOrder
 
-Database Tables
+### Database Tables
 
 Users
 - id
@@ -38,6 +38,10 @@ Products
 
 Orders
 - id
+- user_id
+
+
+OrderProduct
 - order_id
 - product_id 
 - quantity 

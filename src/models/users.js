@@ -11,7 +11,7 @@ class userDatabase {
     async index() {
         try {
             const connection = await database_1.default.connect();
-            const sql = "SELECT * FROM users";
+            const sql = 'SELECT * FROM users';
             const data = await connection.query(sql);
             connection.release();
             return data.rows;
@@ -37,7 +37,12 @@ class userDatabase {
             const connection = await database_1.default.connect();
             const sql = 'INSERT INTO users (firstName, lastName, userName , password ) VALUES ($1, $2, $3,$4) RETURNING *';
             const hash = bcrypt_1.default.hashSync(newUser.password + BCRYPT_PASSWORD, parseInt(SALT_ROUNDS, 10));
-            const data = await connection.query(sql, [newUser.firstName, newUser.lastName, newUser.userName, hash]);
+            const data = await connection.query(sql, [
+                newUser.firstName,
+                newUser.lastName,
+                newUser.userName,
+                hash
+            ]);
             connection.release();
             return data.rows[0];
         }
@@ -74,7 +79,12 @@ class userDatabase {
         try {
             const connection = await database_1.default.connect();
             const sql = 'UPDATE users SET firstName = $1, lastName = $2, userName = $3 WHERE id = ($4) RETURNING *';
-            const data = await connection.query(sql, [newUser.firstName, newUser.lastName, newUser.userName, id]);
+            const data = await connection.query(sql, [
+                newUser.firstName,
+                newUser.lastName,
+                newUser.userName,
+                id
+            ]);
             connection.release();
             return data.rows[0];
         }

@@ -46,7 +46,12 @@ const createUser = async (req, res) => {
     const userName = req.body.userName;
     const password = req.body.password;
     try {
-        const newUser = await database.createUser({ firstName, lastName, userName, password });
+        const newUser = await database.createUser({
+            firstName,
+            lastName,
+            userName,
+            password
+        });
         var token = jsonwebtoken_1.default.sign({ user: newUser }, SECRET_TOKEN);
         res.json(token);
     }
@@ -89,12 +94,12 @@ const updateUser = async (req, res) => {
 //         const user = data.rows[0]
 //     console.log(user)
 //         if (bcrypt.compareSync(password+ BCRYPT_PASSWORD , user.password)) {
-//             return user 
+//             return user
 //         }
-//         return null 
+//         return null
 //     }
 //     connection.release()
-//     return null    
+//     return null
 // }
 // function grabToken (newUser: user) {
 //     return jwt.sign({newUser}, SECRET_TOKEN)
@@ -116,7 +121,7 @@ const updateUser = async (req, res) => {
 //   res.json(grabToken)
 // } catch (err) {
 //     res.json(err)
-// } 
+// }
 // }
 // const verifyAuthToken = (req: Request, res: Response, next: () => void) => {
 //     const authHead = req.headers.authorization as unknown as string

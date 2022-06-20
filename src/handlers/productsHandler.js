@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const products_1 = require("../models/products");
+const authorization_1 = require("../authorization");
 const database = new products_1.productDatabase();
 const index = async (_req, res) => {
     try {
@@ -47,7 +48,7 @@ const updateProduct = async (req, res) => {
         const updateProduct = {
             name: req.body.name,
             price: req.body.price,
-            id: req.body.id,
+            id: req.body.id
         };
         const Updatedproduct = await database.updateProduct(req.body.id, updateProduct);
         res.json(Updatedproduct);
@@ -58,10 +59,10 @@ const updateProduct = async (req, res) => {
     }
 };
 const productHandler = (app) => {
-    app.get('/products', index);
-    app.get('/product/:id', showProduct);
+    app.get('/products', authorization_1.verifyAuthToken, index);
+    app.get('/product/:id', authorization_1.verifyAuthToken, showProduct);
     app.post('/product', createProduct);
-    app.delete('/deleteProduct/:id', deleteProduct);
-    app.put('/updateProduct', updateProduct);
+    app.delete('/deleteProduct/:id', authorization_1.verifyAuthToken, deleteProduct);
+    app.put('/updateProduct', authorization_1.verifyAuthToken, updateProduct);
 };
 exports.default = productHandler;

@@ -127,7 +127,11 @@ var productDatabase = /** @class */ (function () {
                     case 1:
                         connection = _a.sent();
                         sql = 'UPDATE products SET name = $1, price = $2 WHERE id = ($3) RETURNING *';
-                        return [4 /*yield*/, connection.query(sql, [product.name, product.price, id])];
+                        return [4 /*yield*/, connection.query(sql, [
+                                product.name,
+                                product.price,
+                                id
+                            ])];
                     case 2:
                         data = _a.sent();
                         connection.release();

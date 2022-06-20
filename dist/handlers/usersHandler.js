@@ -108,7 +108,12 @@ var createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 _a.label = 1;
             case 1:
                 _a.trys.push([1, 3, , 4]);
-                return [4 /*yield*/, database.createUser({ firstName: firstName, lastName: lastName, userName: userName, password: password })];
+                return [4 /*yield*/, database.createUser({
+                        firstName: firstName,
+                        lastName: lastName,
+                        userName: userName,
+                        password: password
+                    })];
             case 2:
                 newUser = _a.sent();
                 token = jsonwebtoken_1["default"].sign({ user: newUser }, SECRET_TOKEN);
@@ -177,12 +182,12 @@ var updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
 //         const user = data.rows[0]
 //     console.log(user)
 //         if (bcrypt.compareSync(password+ BCRYPT_PASSWORD , user.password)) {
-//             return user 
+//             return user
 //         }
-//         return null 
+//         return null
 //     }
 //     connection.release()
-//     return null    
+//     return null
 // }
 // function grabToken (newUser: user) {
 //     return jwt.sign({newUser}, SECRET_TOKEN)
@@ -204,7 +209,7 @@ var updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
 //   res.json(grabToken)
 // } catch (err) {
 //     res.json(err)
-// } 
+// }
 // }
 // const verifyAuthToken = (req: Request, res: Response, next: () => void) => {
 //     const authHead = req.headers.authorization as unknown as string

@@ -48,14 +48,14 @@ var SECRET_TOKEN = process.env.SECRET_TOKEN;
 var database = new users_1.userDatabase();
 var verifyAuthToken = function (req, res, next) {
     var authHead = req.headers.authorization;
-    var token = authHead.split(' ')[1];
+    var token = authHead === null || authHead === void 0 ? void 0 : authHead.split(" ")[1];
     try {
         jsonwebtoken_1["default"].verify(token, SECRET_TOKEN);
         next();
     }
     catch (error) {
         res.status(401);
-        res.json(error);
+        res.json(token);
         return false;
     }
 };

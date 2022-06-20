@@ -103,7 +103,11 @@ var orderDatabase = /** @class */ (function () {
                     case 1:
                         connection = _a.sent();
                         sql = 'INSERT INTO orders (productID, userID, quantity) VALUES ($1, $2, $3) RETURNING *';
-                        return [4 /*yield*/, connection.query(sql, [newOrder.productID, newOrder.userID, newOrder.quantity])];
+                        return [4 /*yield*/, connection.query(sql, [
+                                newOrder.productID,
+                                newOrder.userID,
+                                newOrder.quantity
+                            ])];
                     case 2:
                         data = _a.sent();
                         connection.release();
@@ -127,7 +131,12 @@ var orderDatabase = /** @class */ (function () {
                     case 1:
                         connection = _a.sent();
                         sql = 'UPDATE orders SET productID = $1, userID = $2, quantity = $3 WHERE id = ($3) RETURNING *';
-                        return [4 /*yield*/, connection.query(sql, [newOrder.productID, newOrder.userID, newOrder.quantity, id])];
+                        return [4 /*yield*/, connection.query(sql, [
+                                newOrder.productID,
+                                newOrder.userID,
+                                newOrder.quantity,
+                                id
+                            ])];
                     case 2:
                         data = _a.sent();
                         connection.release();

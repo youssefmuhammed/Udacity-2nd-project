@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const orders_1 = require("../models/orders");
+const authorization_1 = require("../authorization");
 const database = new orders_1.orderDatabase();
 const index = async (_req, res) => {
     try {
@@ -59,10 +60,10 @@ const updateOrder = async (req, res) => {
     }
 };
 const orderHandler = (app) => {
-    app.get('/orders', index);
-    app.get('/order/:id', showOrder);
+    app.get('/orders', authorization_1.verifyAuthToken, index);
+    app.get('/order/:id', authorization_1.verifyAuthToken, showOrder);
     app.post('/order', createOrder);
-    app.delete('/deleteOrder/:id', deleteOrder);
-    app.put('/updateOrder', updateOrder);
+    app.delete('/deleteOrder/:id', authorization_1.verifyAuthToken, deleteOrder);
+    app.put('/updateOrder', authorization_1.verifyAuthToken, updateOrder);
 };
 exports.default = orderHandler;

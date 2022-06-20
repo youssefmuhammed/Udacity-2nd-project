@@ -12,15 +12,14 @@ const SECRET_TOKEN = process.env.SECRET_TOKEN;
 const database = new users_1.userDatabase();
 const verifyAuthToken = (req, res, next) => {
     const authHead = req.headers.authorization;
-    const token = authHead.split('')[1];
+    const token = authHead?.split(" ")[1];
     try {
-        jsonwebtoken_1.default.verify(token, process.env.SECRET_TOKEN);
+        jsonwebtoken_1.default.verify(token, SECRET_TOKEN);
         next();
     }
     catch (error) {
-        console.error(error);
         res.status(401);
-        res.json("Access denied, invalid token");
+        res.json(token);
         return false;
     }
 };
@@ -42,7 +41,9 @@ const authintication = async (req, res) => {
             res.send(' Authorization Refused');
             return false;
         }
+        res.send('access granted');
         res.json(grabToken);
+        res.send(newUser);
     }
     catch (err) {
         res.json(err);

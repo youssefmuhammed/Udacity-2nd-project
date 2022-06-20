@@ -56,7 +56,7 @@ var userDatabase = /** @class */ (function () {
                         return [4 /*yield*/, database_1["default"].connect()];
                     case 1:
                         connection = _a.sent();
-                        sql = "SELECT * FROM users";
+                        sql = 'SELECT * FROM users';
                         return [4 /*yield*/, connection.query(sql)];
                     case 2:
                         data = _a.sent();
@@ -106,7 +106,12 @@ var userDatabase = /** @class */ (function () {
                         connection = _a.sent();
                         sql = 'INSERT INTO users (firstName, lastName, userName , password ) VALUES ($1, $2, $3,$4) RETURNING *';
                         hash = bcrypt_1["default"].hashSync(newUser.password + BCRYPT_PASSWORD, parseInt(SALT_ROUNDS, 10));
-                        return [4 /*yield*/, connection.query(sql, [newUser.firstName, newUser.lastName, newUser.userName, hash])];
+                        return [4 /*yield*/, connection.query(sql, [
+                                newUser.firstName,
+                                newUser.lastName,
+                                newUser.userName,
+                                hash
+                            ])];
                     case 2:
                         data = _a.sent();
                         connection.release();
@@ -166,7 +171,12 @@ var userDatabase = /** @class */ (function () {
                     case 1:
                         connection = _a.sent();
                         sql = 'UPDATE users SET firstName = $1, lastName = $2, userName = $3 WHERE id = ($4) RETURNING *';
-                        return [4 /*yield*/, connection.query(sql, [newUser.firstName, newUser.lastName, newUser.userName, id])];
+                        return [4 /*yield*/, connection.query(sql, [
+                                newUser.firstName,
+                                newUser.lastName,
+                                newUser.userName,
+                                id
+                            ])];
                     case 2:
                         data = _a.sent();
                         connection.release();

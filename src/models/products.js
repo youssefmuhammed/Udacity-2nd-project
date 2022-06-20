@@ -46,7 +46,11 @@ class productDatabase {
         try {
             const connection = await database_1.default.connect();
             const sql = 'UPDATE products SET name = $1, price = $2 WHERE id = ($3) RETURNING *';
-            const data = await connection.query(sql, [product.name, product.price, id]);
+            const data = await connection.query(sql, [
+                product.name,
+                product.price,
+                id
+            ]);
             connection.release();
             return data.rows[0];
         }

@@ -34,7 +34,11 @@ class orderDatabase {
         try {
             const connection = await database_1.default.connect();
             const sql = 'INSERT INTO orders (productID, userID, quantity) VALUES ($1, $2, $3) RETURNING *';
-            const data = await connection.query(sql, [newOrder.productID, newOrder.userID, newOrder.quantity]);
+            const data = await connection.query(sql, [
+                newOrder.productID,
+                newOrder.userID,
+                newOrder.quantity
+            ]);
             connection.release();
             return data.rows[0];
         }
@@ -46,7 +50,12 @@ class orderDatabase {
         try {
             const connection = await database_1.default.connect();
             const sql = 'UPDATE orders SET productID = $1, userID = $2, quantity = $3 WHERE id = ($3) RETURNING *';
-            const data = await connection.query(sql, [newOrder.productID, newOrder.userID, newOrder.quantity, id]);
+            const data = await connection.query(sql, [
+                newOrder.productID,
+                newOrder.userID,
+                newOrder.quantity,
+                id
+            ]);
             connection.release();
             return data.rows[0];
         }
