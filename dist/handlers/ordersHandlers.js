@@ -126,8 +126,7 @@ var updateOrder = function (req, res) { return __awaiter(void 0, void 0, void 0,
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 updateOrder_1 = {
-                    productID: req.body.productID,
-                    userID: req.body.userID,
+                    user_id: req.body.user_id,
                     quantity: req.body.quantity,
                     id: req.body.id
                 };

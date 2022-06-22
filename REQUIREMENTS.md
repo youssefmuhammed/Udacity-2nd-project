@@ -23,26 +23,25 @@
 ### Database Tables
 
 Users
-- id
-- firstName
-- lastName
-- userName
-- password
+- id         =>   SERIAL PRIMARY KEY
+- firstName  =>   VARCHAR(300) 
+- lastName   =>   VARCHAR(300) 
+- userName   =>   VARCHAR(300) 
+- password   =>   VARCHAR(300) 
 
 Products
--  id
-- name
-- price
+-  id        =>   SERIAL PRIMARY KEY
+- name       =>   VARCHAR(300)
+- price      =>   INTEGER
 
 
 
 Orders
-- id
-- user_id
+- id       =>   SERIAL PRIMARY KEY
+- user_id  =>  INTEGER  REFERENCES users id
 
 
 OrderProduct
-- order_id
-- product_id 
-- quantity 
-
+- order_id    =>  INTEGER  REFERENCES  orders id  
+- product_id  =>  INTEGER  REFERENCES products id
+- quantity    =>  INTEGER 

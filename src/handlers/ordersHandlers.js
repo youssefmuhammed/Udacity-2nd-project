@@ -46,8 +46,7 @@ const deleteOrder = async (req, res) => {
 const updateOrder = async (req, res) => {
     try {
         const updateOrder = {
-            productID: req.body.productID,
-            userID: req.body.userID,
+            user_id: req.body.user_id,
             quantity: req.body.quantity,
             id: req.body.id
         };
@@ -64,6 +63,6 @@ const orderHandler = (app) => {
     app.get('/order/:id', authorization_1.verifyAuthToken, showOrder);
     app.post('/order', createOrder);
     app.delete('/deleteOrder/:id', authorization_1.verifyAuthToken, deleteOrder);
-    app.put('/updateOrder', authorization_1.verifyAuthToken, updateOrder);
+    app.put('/updateOrder/:id', authorization_1.verifyAuthToken, updateOrder);
 };
 exports.default = orderHandler;

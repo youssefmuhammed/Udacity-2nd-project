@@ -12,7 +12,8 @@ CREATE TABLE products (
 );
 CREATE TABLE orders (
   id      SERIAL PRIMARY KEY,
-  user_id INTEGER NOT NULL REFERENCES users (id)
+  user_id INTEGER NOT NULL REFERENCES users (id),
+  quantity INTEGER NOT NULL
 );
 CREATE TABLE OrderProduct (
   order_id   INTEGER NOT NULL REFERENCES orders (id),

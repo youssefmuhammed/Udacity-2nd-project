@@ -22,8 +22,8 @@ const index = async (_req: Request, res: Response) => {
 };
 const show = async (req: Request, res: Response) => {
   try {
-    const users = await database.show(req.params.id as unknown as number);
-    res.json(users);
+    const user = await database.show(req.params.id as unknown as number);
+    res.json(user);
   } catch (err) {
     res.status(400);
     res.json(err);
@@ -138,8 +138,8 @@ const updateUser = async (req: Request, res: Response) => {
 // }
 const userHandler = (app: express.Application) => {
   app.get('/users', verifyAuthToken, index);
-  app.get('/user/:id', verifyAuthToken, show);
   app.post('/user', createUser);
+  app.get('/user/:id', verifyAuthToken, show);
   app.delete('/deleteUser/:id', verifyAuthToken, deleteUser);
   app.put('/updateUser', verifyAuthToken, updateUser);
 };

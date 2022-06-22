@@ -67,15 +67,15 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
     });
 }); };
 var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var users, err_2;
+    var user, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, database.show(req.params.id)];
             case 1:
-                users = _a.sent();
-                res.json(users);
+                user = _a.sent();
+                res.json(user);
                 return [3 /*break*/, 3];
             case 2:
                 err_2 = _a.sent();
@@ -223,8 +223,8 @@ var updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
 // }
 var userHandler = function (app) {
     app.get('/users', authorization_1.verifyAuthToken, index);
-    app.get('/user/:id', authorization_1.verifyAuthToken, show);
     app.post('/user', createUser);
+    app.get('/user/:id', authorization_1.verifyAuthToken, show);
     app["delete"]('/deleteUser/:id', authorization_1.verifyAuthToken, deleteUser);
     app.put('/updateUser', authorization_1.verifyAuthToken, updateUser);
 };

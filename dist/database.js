@@ -15,7 +15,8 @@ if (ENV === 'test') {
         host: POSTGRES_HOST,
         database: POSTGRES_DB_TEST,
         user: POSTGRES_USER,
-        password: POSTGRES_PASS
+        password: POSTGRES_PASS,
+        port: port
     });
 }
 if (ENV === 'dev') {

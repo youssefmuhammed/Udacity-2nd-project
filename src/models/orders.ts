@@ -1,8 +1,7 @@
 import client from '../database';
 
 export type order = {
-  productID: number;
-  userID: number;
+  user_id: number;
   quantity: number;
   id: number;
 };
@@ -34,12 +33,8 @@ export class orderDatabase {
     try {
       const connection = await client.connect();
       const sql =
-        'INSERT INTO orders (productID, userID, quantity) VALUES ($1, $2, $3) RETURNING *';
-      const data = await connection.query(sql, [
-        newOrder.productID,
-        newOrder.userID,
-        newOrder.quantity
-      ]);
+        'INSERT INTO orders (user_id, quantity) VALUES ($1, $2) RETURNING *';
+      const data = await connection.query(sql, [newOrder.user_id,newOrder.quantity]);
       connection.release();
       return data.rows[0];
     } catch (err) {
@@ -50,10 +45,9 @@ export class orderDatabase {
     try {
       const connection = await client.connect();
       const sql =
-        'UPDATE orders SET productID = $1, userID = $2, quantity = $3 WHERE id = ($3) RETURNING *';
+        'UPDATE orders SET user_id = $1,  quantity= $2, WHERE id = ($3) RETURNING *';
       const data = await connection.query(sql, [
-        newOrder.productID,
-        newOrder.userID,
+        newOrder.user_id,
         newOrder.quantity,
         id
       ]);

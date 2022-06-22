@@ -22,8 +22,8 @@ const index = async (_req, res) => {
 };
 const show = async (req, res) => {
     try {
-        const users = await database.show(req.params.id);
-        res.json(users);
+        const user = await database.show(req.params.id);
+        res.json(user);
     }
     catch (err) {
         res.status(400);
@@ -135,8 +135,8 @@ const updateUser = async (req, res) => {
 // }
 const userHandler = (app) => {
     app.get('/users', authorization_1.verifyAuthToken, index);
-    app.get('/user/:id', authorization_1.verifyAuthToken, show);
     app.post('/user', createUser);
+    app.get('/user/:id', authorization_1.verifyAuthToken, show);
     app.delete('/deleteUser/:id', authorization_1.verifyAuthToken, deleteUser);
     app.put('/updateUser', authorization_1.verifyAuthToken, updateUser);
 };

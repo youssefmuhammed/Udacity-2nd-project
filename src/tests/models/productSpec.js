@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const products_1 = require("../../models/products");
 const model = new products_1.productDatabase();
-describe("Product Model", () => {
+describe('Product Model', () => {
     it('should have an index method', () => {
         expect(model.index).toBeDefined();
     });
