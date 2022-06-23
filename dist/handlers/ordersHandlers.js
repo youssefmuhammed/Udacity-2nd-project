@@ -133,7 +133,7 @@ var updateOrder = function (req, res) { return __awaiter(void 0, void 0, void 0,
                 return [4 /*yield*/, database.updateOrder(req.body.id, updateOrder_1)];
             case 1:
                 Updatedorder = _a.sent();
-                res.json(Updatedorder);
+                res.json(updateOrder_1);
                 return [3 /*break*/, 3];
             case 2:
                 err_5 = _a.sent();
@@ -149,6 +149,6 @@ var orderHandler = function (app) {
     app.get('/order/:id', authorization_1.verifyAuthToken, showOrder);
     app.post('/order', createOrder);
     app["delete"]('/deleteOrder/:id', authorization_1.verifyAuthToken, deleteOrder);
-    app.put('/updateOrder', authorization_1.verifyAuthToken, updateOrder);
+    app.put('/updateOrder/:id', authorization_1.verifyAuthToken, updateOrder);
 };
 exports["default"] = orderHandler;

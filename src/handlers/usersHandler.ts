@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { user, userDatabase } from '../models/users';
+import { user, userDatabase, userID } from '../models/users';
 import jwt, { Secret } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import client from '../database';
@@ -20,25 +20,7 @@ const index = async (_req: Request, res: Response) => {
     res.json(err);
   }
 };
-const show = async (req: Request, res: Response) => {
-  try {
-    const user = await database.show(req.params.id as unknown as number);
-    res.json(user);
-  } catch (err) {
-    res.status(400);
-    res.json(err);
-  }
-};
 
-// const createUser = async (req: Request, res: Response) => {
-//     try {
-//         const newUser = await database.createUser(req.body)
-//         res.json(newUser);
-//     } catch (err) {
-//        res.status(400)
-//        res.json(err)
-//     }
-// }
 const SECRET_TOKEN = process.env.SECRET_TOKEN as Secret;
 const createUser = async (req: Request, res: Response) => {
   const firstName = req.body.firstName;
@@ -59,6 +41,30 @@ const createUser = async (req: Request, res: Response) => {
     res.json(err);
   }
 };
+
+const showUser = async (req: Request, res: Response) => {
+  try {
+    const user  = await database.showUser(req.params.id as unknown as number);
+  
+
+    res.json(user);
+    
+  } catch (err) {
+    res.status(400);
+    res.json(err);
+  }
+};
+
+// const createUser = async (req: Request, res: Response) => {
+//     try {
+//         const newUser = await database.createUser(req.body)
+//         res.json(newUser);
+//     } catch (err) {
+//        res.status(400)
+//        res.json(err)
+//     }
+// }
+
 
 const deleteUser = async (req: Request, res: Response) => {
   try {
@@ -81,7 +87,7 @@ const updateUser = async (req: Request, res: Response) => {
       password: req.body.password
     };
     const UpdatedUser = await database.updateUser(req.body.id, updateUser);
-    res.json(UpdatedUser);
+    res.json(updateUser);
   } catch (err) {
     res.status(400);
     res.json((err as Error).message);
@@ -138,8 +144,8 @@ const updateUser = async (req: Request, res: Response) => {
 // }
 const userHandler = (app: express.Application) => {
   app.get('/users', verifyAuthToken, index);
+  app.get('/user/:id', verifyAuthToken, showUser);
   app.post('/user', createUser);
-  app.get('/user/:id', verifyAuthToken, show);
   app.delete('/deleteUser/:id', verifyAuthToken, deleteUser);
   app.put('/updateUser', verifyAuthToken, updateUser);
 };

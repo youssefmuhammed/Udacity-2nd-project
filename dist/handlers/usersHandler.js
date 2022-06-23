@@ -66,38 +66,9 @@ var index = function (_req, res) { return __awaiter(void 0, void 0, void 0, func
         }
     });
 }); };
-var show = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, err_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, database.show(req.params.id)];
-            case 1:
-                user = _a.sent();
-                res.json(user);
-                return [3 /*break*/, 3];
-            case 2:
-                err_2 = _a.sent();
-                res.status(400);
-                res.json(err_2);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-// const createUser = async (req: Request, res: Response) => {
-//     try {
-//         const newUser = await database.createUser(req.body)
-//         res.json(newUser);
-//     } catch (err) {
-//        res.status(400)
-//        res.json(err)
-//     }
-// }
 var SECRET_TOKEN = process.env.SECRET_TOKEN;
 var createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var firstName, lastName, userName, password, newUser, token, err_3;
+    var firstName, lastName, userName, password, newUser, token, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -120,14 +91,43 @@ var createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 res.json(token);
                 return [3 /*break*/, 4];
             case 3:
-                err_3 = _a.sent();
+                err_2 = _a.sent();
                 res.status(400);
-                res.json(err_3);
+                res.json(err_2);
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }
     });
 }); };
+var showUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var user, err_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, database.showUser(req.params.id)];
+            case 1:
+                user = _a.sent();
+                res.json(user);
+                return [3 /*break*/, 3];
+            case 2:
+                err_3 = _a.sent();
+                res.status(400);
+                res.json(err_3);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+// const createUser = async (req: Request, res: Response) => {
+//     try {
+//         const newUser = await database.createUser(req.body)
+//         res.json(newUser);
+//     } catch (err) {
+//        res.status(400)
+//        res.json(err)
+//     }
+// }
 var deleteUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var deletedUser, err_4;
     return __generator(this, function (_a) {
@@ -163,7 +163,7 @@ var updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
                 return [4 /*yield*/, database.updateUser(req.body.id, updateUser_1)];
             case 1:
                 UpdatedUser = _a.sent();
-                res.json(UpdatedUser);
+                res.json(updateUser_1);
                 return [3 /*break*/, 3];
             case 2:
                 err_5 = _a.sent();
@@ -223,8 +223,8 @@ var updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, 
 // }
 var userHandler = function (app) {
     app.get('/users', authorization_1.verifyAuthToken, index);
+    app.get('/user/:id', authorization_1.verifyAuthToken, showUser);
     app.post('/user', createUser);
-    app.get('/user/:id', authorization_1.verifyAuthToken, show);
     app["delete"]('/deleteUser/:id', authorization_1.verifyAuthToken, deleteUser);
     app.put('/updateUser', authorization_1.verifyAuthToken, updateUser);
 };

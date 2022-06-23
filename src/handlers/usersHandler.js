@@ -20,25 +20,6 @@ const index = async (_req, res) => {
         res.json(err);
     }
 };
-const show = async (req, res) => {
-    try {
-        const user = await database.show(req.params.id);
-        res.json(user);
-    }
-    catch (err) {
-        res.status(400);
-        res.json(err);
-    }
-};
-// const createUser = async (req: Request, res: Response) => {
-//     try {
-//         const newUser = await database.createUser(req.body)
-//         res.json(newUser);
-//     } catch (err) {
-//        res.status(400)
-//        res.json(err)
-//     }
-// }
 const SECRET_TOKEN = process.env.SECRET_TOKEN;
 const createUser = async (req, res) => {
     const firstName = req.body.firstName;
@@ -60,6 +41,25 @@ const createUser = async (req, res) => {
         res.json(err);
     }
 };
+const showUser = async (req, res) => {
+    try {
+        const user = await database.showUser(req.params.id);
+        res.json(user);
+    }
+    catch (err) {
+        res.status(400);
+        res.json(err);
+    }
+};
+// const createUser = async (req: Request, res: Response) => {
+//     try {
+//         const newUser = await database.createUser(req.body)
+//         res.json(newUser);
+//     } catch (err) {
+//        res.status(400)
+//        res.json(err)
+//     }
+// }
 const deleteUser = async (req, res) => {
     try {
         const deletedUser = await database.deleteUser(req.params.id);
@@ -79,7 +79,7 @@ const updateUser = async (req, res) => {
             password: req.body.password
         };
         const UpdatedUser = await database.updateUser(req.body.id, updateUser);
-        res.json(UpdatedUser);
+        res.json(updateUser);
     }
     catch (err) {
         res.status(400);
@@ -135,8 +135,8 @@ const updateUser = async (req, res) => {
 // }
 const userHandler = (app) => {
     app.get('/users', authorization_1.verifyAuthToken, index);
+    app.get('/user/:id', authorization_1.verifyAuthToken, showUser);
     app.post('/user', createUser);
-    app.get('/user/:id', authorization_1.verifyAuthToken, show);
     app.delete('/deleteUser/:id', authorization_1.verifyAuthToken, deleteUser);
     app.put('/updateUser', authorization_1.verifyAuthToken, updateUser);
 };

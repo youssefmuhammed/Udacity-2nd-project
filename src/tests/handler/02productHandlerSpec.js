@@ -48,4 +48,13 @@ describe('products Handler', () => {
         };
         const response = await request.put('/updateProduct').auth(token, { type: 'bearer' }).expect(200);
     });
+    it('delete product by id ', async () => {
+        const product = {
+            name: 'product 2',
+            price: 20,
+            id: 0
+        };
+        const response = await request.post('/product').send(product);
+        await request.delete('/deleteProduct/2').auth(token, { type: 'bearer' }).expect(200);
+    });
 });

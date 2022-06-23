@@ -2,6 +2,7 @@ import client from '../database';
 import bcrypt from 'bcrypt';
 import { Request, Response } from 'express';
 import jwt, { Secret } from 'jsonwebtoken';
+import { QueryArrayResult, QueryResult } from 'pg';
 const { BCRYPT_PASSWORD, SALT_ROUNDS } = process.env;
 
 export type user = {
@@ -27,12 +28,13 @@ export class userDatabase {
       throw new Error(`Cannot get users ${err}`);
     }
   }
-  async show(id: number): Promise<userID> {
+  async showUser(id: number): Promise<userID> {
     try {
       const connection = await client.connect();
       const sql = 'SELECT * FROM users WHERE id = ($1)';
       const data = await connection.query(sql, [id]);
       connection.release();
+
       return data.rows[0];
     } catch (err) {
       throw new Error(`Cannot get users ${err}`);

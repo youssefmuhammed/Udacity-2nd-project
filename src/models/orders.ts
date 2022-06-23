@@ -3,9 +3,10 @@ import client from '../database';
 export type order = {
   user_id: number;
   quantity: number;
-  id: number;
 };
-
+export interface orderID extends order {
+  id: number;
+}
 export class orderDatabase {
   async index(): Promise<order[]> {
     try {
@@ -32,8 +33,7 @@ export class orderDatabase {
   async createOrder(newOrder: order): Promise<order> {
     try {
       const connection = await client.connect();
-      const sql =
-        'INSERT INTO orders (user_id, quantity) VALUES ($1, $2) RETURNING *';
+      const sql = 'INSERT INTO orders (user_id, quantity) VALUES ($1, $2) RETURNING *';
       const data = await connection.query(sql, [newOrder.user_id,newOrder.quantity]);
       connection.release();
       return data.rows[0];

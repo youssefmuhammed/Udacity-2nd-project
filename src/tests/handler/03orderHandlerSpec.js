@@ -39,6 +39,14 @@ describe('order Handler', () => {
     it('show all orders with authonitication ', async () => {
         const response = await request.get('/orders').auth(token, { type: 'bearer' }).expect(200);
     });
+    it('update order', async () => {
+        const updateOrder = {
+            user_id: 4,
+            quantity: 200,
+            id: 5
+        };
+        const response = await request.put('/updateOrder/5').send(updateOrder).auth(token, { type: 'bearer' }).expect(200);
+    });
     it('delete order  ', async () => {
         const response = await request.delete('/deleteOrder/1').auth(token, { type: 'bearer' }).expect(200);
     });

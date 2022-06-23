@@ -20,7 +20,7 @@ class userDatabase {
             throw new Error(`Cannot get users ${err}`);
         }
     }
-    async show(id) {
+    async showUser(id) {
         try {
             const connection = await database_1.default.connect();
             const sql = 'SELECT * FROM users WHERE id = ($1)';

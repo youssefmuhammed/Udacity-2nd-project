@@ -2,7 +2,7 @@ import supertest from 'supertest';
 import jwt, { Secret } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import { app } from '../../server';
-import {order} from '../../models/orders'
+import {order, orderID} from '../../models/orders'
 import { user } from '../../models/users';
 import { product } from '../../models/products';
 
@@ -30,7 +30,7 @@ describe ('order Handler' , ()=> {
     });
     console.log(token)
 it ('create order ' ,async () => {
-    const newOrder : order = {
+    const newOrder : orderID = {
         user_id: 4,
         quantity: 50,
         id: 1
@@ -45,6 +45,16 @@ it ('dont show all orders without authonitication ' ,async () => {
 })
 it ('show all orders with authonitication ' ,async () => {
     const response = await request.get('/orders').auth(token, { type: 'bearer' }).expect(200)
+    
+})
+it ('update order' ,async () => {
+
+   const updateOrder : orderID = {
+    user_id: 4,
+    quantity: 200,
+    id : 5
+}
+const response = await request.put('/updateOrder/5').send(updateOrder).auth(token, { type: 'bearer' }).expect(200)
     
 })
 it ('delete order  ' ,async () => {

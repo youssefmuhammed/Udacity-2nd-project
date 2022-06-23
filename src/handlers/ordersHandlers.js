@@ -51,7 +51,7 @@ const updateOrder = async (req, res) => {
             id: req.body.id
         };
         const Updatedorder = await database.updateOrder(req.body.id, updateOrder);
-        res.json(Updatedorder);
+        res.json(updateOrder);
     }
     catch (err) {
         res.status(400);

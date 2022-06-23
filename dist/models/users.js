@@ -70,7 +70,7 @@ var userDatabase = /** @class */ (function () {
             });
         });
     };
-    userDatabase.prototype.show = function (id) {
+    userDatabase.prototype.showUser = function (id) {
         return __awaiter(this, void 0, void 0, function () {
             var connection, sql, data, err_2;
             return __generator(this, function (_a) {

@@ -7,8 +7,8 @@
     "start": "nodemon src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 'node ./dist/server.js'",
     "up": "db-migrate --env test up && db-migrate up",
-    "down": "db-migrate --env test down && db-migrate down",
-    "test": "tsc && export ENV=test&& db-migrate --env test up && jasmine-ts && db-migrate --env test down",
+    "down": "db-migrate --env test down -c 4 && db-migrate down -c 4",
+    "test": "tsc && export ENV=test&& db-migrate --env test up  && jasmine-ts && db-migrate --env test down -c 4",
     "tsc": "tsc",
     "lint": "eslint \"src/**/*.ts\"",
     "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write"

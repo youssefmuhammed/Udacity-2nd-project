@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { order, orderDatabase } from '../models/orders';
+import { order, orderDatabase, orderID } from '../models/orders';
 import { authintication, verifyAuthToken } from '../authorization';
 
 const database = new orderDatabase();
@@ -47,13 +47,13 @@ const deleteOrder = async (req: Request, res: Response) => {
 
 const updateOrder = async (req: Request, res: Response) => {
   try {
-    const updateOrder: order = {
+    const updateOrder: orderID = {
       user_id: req.body.user_id,
       quantity: req.body.quantity,
       id: req.body.id
     };
     const Updatedorder = await database.updateOrder(req.body.id, updateOrder);
-    res.json(Updatedorder);
+    res.json(updateOrder);
   } catch (err) {
     res.status(400);
     res.json((err as Error).message);
